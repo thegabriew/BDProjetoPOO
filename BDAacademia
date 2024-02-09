@@ -1,0 +1,68 @@
+create database ACADEMIA;
+
+use ACADEMIA;
+
+create table CLIENTE (
+    codCliente int auto_increment primary key,
+    nome varchar(90) not null,
+    cpf varchar(11),
+    telefone varchar(20),
+    email varchar(50),
+    dataNascimento date,
+    pagamento varchar(80)
+);
+
+create table FUNCIONARIO (
+    codFuncionario int auto_increment primary key,
+    nome varchar(90) not null,
+    cpf varchar(11),
+    telefone varchar(20),
+    email varchar(50),
+    dataNascimento date,
+    dataContratacao date,
+    salario int
+);
+
+create table EQUIPAMENTO (
+    codEquipamento int auto_increment primary key,
+    nome varchar(90) not null,
+    peso int,
+    tipo varchar(80),
+    dataCompra date
+);
+
+create table AGENDAR_AULA (
+    idAula int auto_increment primary key,
+    nomeInstrutor int,
+    nomeAluno int,
+    horario time,
+    descricao varchar(200),
+    constraint fkAluno foreign key (nomeAluno) references CLIENTE (codCliente) on delete set null on update cascade,
+    constraint fkInstrutor foreign key (nomeInstrutor) references FUNCIONARIO (codFuncionario) on delete set null on update cascade
+);
+
+INSERT INTO CLIENTE (nome, cpf, telefone, email, dataNascimento, pagamento) VALUES
+('Ana Silva', '000.000.000-00', '(11) 9999-9999', 'ana.silva@email.com', '1980-01-01', 'Cartão de crédito'),
+('João Oliveira', '111.111.111-11', '(21) 8888-8888', 'joao.oliveira@email.com', '1990-02-02', 'Dinheiro'),
+('Maria Souza', '222.222.222-22', '(31) 7777-7777', 'maria.souza@email.com', '2000-03-03', 'Débito em conta'),
+('Pedro Santos', '333.333.333-33', '(41) 6666-6666', 'pedro.santos@email.com', '2010-04-04', 'Cheque'),
+('Rafael Costa', '444.444.444-44', '(51) 5555-5555', 'rafael.costa@email.com', '2020-05-05', 'Boleto');
+
+INSERT INTO FUNCIONARIO (nome, cpf, telefone, email, dataNascimento, dataContratacao, salario) VALUES
+('Bruno Fernandes', '000.000.000-00', '(11) 9999-9999', 'bruno.fernandes@email.com', '1980-01-01', '2023-01-01', 5000.00),
+('Carolina Andrade', '111.111.111-11', '(21) 8888-8888', 'carolina.andrade@email.com', '1990-02-02', '2023-02-02', 6000.00),
+('Daniel Barbosa', '222.222.222-22', '(31) 7777-7777', 'daniel.barbosa@email.com', '2000-03-03', '2023-03-03', 7000.00),
+('Eduardo Campos', '333.333.333-33', '(41) 6666-6666', 'eduardo.campos@email.com', '2010-04-04', '2023-04-04', 8000.00),
+('Fernanda Gomes', '444.444.444-44', '(51) 5555-5555', 'fernanda.gomes@email.com', '2020-05-05', '2023-05-05', 9000.00);
+
+INSERT INTO EQUIPAMENTO (nome, peso, tipo, dataCompra) VALUES
+('Esteira ergométrica', 100, 'Cardio', '2023-01-01'),
+('Bicicleta ergométrica', 50, 'Cardio', '2023-02-02'),
+('Banco de musculação', 150, 'Musculação', '2023-03-03'),
+('Halteres', 20, 'Musculação', '2023-04-04'),
+('Colchonete', 5, 'Yoga', '2023-05-05');
+
+INSERT INTO AGENDAR_AULA (nomeInstrutor, nomeAluno, horario, descricao) VALUES
+('Bruno Fernandes', 'Ana Silva', '10:00', 'Aula de musculação com foco em hipertrofia'),
+('Carolina Andrade', 'João Oliveira', '15:35', 'Aula de Yoga com foco em bem estar'),
+('Daniel Barbosa', 'Maria Souza', '20:00', 'Aula de musculação com foco no esporte voleibol');
