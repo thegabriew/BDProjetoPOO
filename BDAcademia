@@ -17,6 +17,7 @@ create table FUNCIONARIO (
     nome varchar(90) not null,
     cpf varchar(15),
     telefone varchar(20),
+    cargo varchar (50),
     email varchar(50),
     dataNascimento date,
     dataContratacao date,
@@ -37,33 +38,6 @@ create table AGENDAR_AULA (
     nomeAluno varchar (90),
     horario time,
     descricao varchar(200),
-    constraint fkAluno foreign key (nomeAluno) references CLIENTE (nomeAluno) on delete set null on update cascade,
-    constraint fkInstrutor foreign key (nomeInstrutor) references FUNCIONARIO (nomeInstrutor) on delete set null on update cascade
+    constraint fkAluno foreign key (nomeAluno) references CLIENTE (nome) on delete set null on update cascade,
+    constraint fkInstrutor foreign key (nomeInstrutor) references FUNCIONARIO (nome) on delete set null on update cascade
 );
-
-INSERT INTO CLIENTE (nome, cpf, telefone, email, dataNascimento, pagamento) VALUES
-('Ana Silva', '000.000.000-00', '11 99999999', 'ana.silva@email.com', '1980-01-01', 'Cartão de crédito'),
-('João Oliveira', '111.111.111-11', '21 88888888', 'joao.oliveira@email.com', '1990-02-02', 'Dinheiro'),
-('Maria Souza', '222.222.222-22', '31 77777777', 'maria.souza@email.com', '2000-03-03', 'Débito em conta'),
-('Pedro Santos', '333.333.333-33', '41 66666666', 'pedro.santos@email.com', '2010-04-04', 'Cheque'),
-('Rafael Costa', '444.444.444-44', '51 55555555', 'rafael.costa@email.com', '2020-05-05', 'Boleto');
-
-INSERT INTO FUNCIONARIO (nome, cpf, telefone, email, dataNascimento, dataContratacao, salario) VALUES
-('Bruno Fernandes', '000.000.000-00', '(11) 9999-9999', 'bruno.fernandes@email.com', '1980-01-01', '2023-01-01', 5000),
-('Carolina Andrade', '111.111.111-11', '(21) 8888-8888', 'carolina.andrade@email.com', '1990-02-02', '2023-02-02', 6000),
-('Daniel Barbosa', '222.222.222-22', '(31) 7777-7777', 'daniel.barbosa@email.com', '2000-03-03', '2023-03-03', 7000),
-('Eduardo Campos', '333.333.333-33', '(41) 6666-6666', 'eduardo.campos@email.com', '2010-04-04', '2023-04-04', 8000),
-('Fernanda Gomes', '444.444.444-44', '(51) 5555-5555', 'fernanda.gomes@email.com', '2020-05-05', '2023-05-05', 9000);
-
-INSERT INTO EQUIPAMENTO (nome, peso, tipo, dataCompra) VALUES
-('Esteira ergométrica', 100, 'Cardio', '2023-01-01'),
-('Bicicleta ergométrica', 50, 'Cardio', '2023-02-02'),
-('Banco de musculação', 150, 'Musculação', '2023-03-03'),
-('Halteres', 20, 'Musculação', '2023-04-04'),
-('Colchonete', 5, 'Yoga', '2023-05-05');
-
-
-INSERT INTO AGENDAR_AULA (nomeInstrutor, nomeAluno, horario, descricao) VALUES
-('Ana Silva', 'Bruno Fernandes', '10:00', 'Aula de musculação com foco em hipertrofia'),
-('João Oliveira','Carolina Andrade', '15:35', 'Aula de Yoga com foco em bem estar'),
-('Maria Souza', 'Daniel Barbosa', '20:00', 'Aula de musculação com foco no esporte voleibol');
