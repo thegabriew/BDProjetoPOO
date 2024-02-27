@@ -2,8 +2,8 @@ create database ACADEMIA;
 
 use ACADEMIA;
 
-create table CLIENTE (
-    codCliente int auto_increment primary key,
+create table ALUNO (
+    codAluno int auto_increment primary key,
     nome varchar(90) not null,
     cpf varchar(15),
     telefone varchar(20),
@@ -33,11 +33,11 @@ create table EQUIPAMENTO (
 );
 
 create table AGENDAR_AULA (
-    idAula int auto_increment primary key,
-    nomeInstrutor varchar (90),
-    nomeAluno varchar (90),
+    codAula int auto_increment primary key,
+    codFuncionario int,
+    codAluno int,
     horario time,
     descricao varchar(200),
-    constraint fkAluno foreign key (nomeAluno) references CLIENTE (nome) on delete set null on update cascade,
-    constraint fkInstrutor foreign key (nomeInstrutor) references FUNCIONARIO (nome) on delete set null on update cascade
+    constraint codAluno foreign key (codAluno) references ALUNO (codAluno) on delete set null on update cascade,
+    constraint codFuncionario foreign key (codFuncionario) references FUNCIONARIO (codFuncionario) on delete set null on update cascade
 );
